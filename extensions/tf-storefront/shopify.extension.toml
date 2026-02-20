@@ -1,0 +1,8 @@
+[extension]
+name = "THUNDERFIRE Storefront"
+handle = "tf-storefront"
+type = "theme_app_extension"
+
+[[extension.blocks]]
+name = "Node Health"
+template = "blocks/node-health/block.liquid"

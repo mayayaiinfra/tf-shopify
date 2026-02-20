@@ -1,0 +1,41 @@
+# Learn more: https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "THUNDERFIRE"
+client_id = ""  # Filled by Shopify CLI on first `shopify app dev`
+handle = "thunderfire"
+application_url = "https://tf-shopify.fly.dev"
+
+[access_scopes]
+scopes = "read_products,write_products,read_orders,read_inventory,write_inventory"
+use_legacy_install_flow = false
+
+[auth]
+redirect_urls = [ "https://tf-shopify.fly.dev/auth/callback" ]
+
+[webhooks]
+api_version = "2025-07"
+
+  [webhooks.privacy_compliance]
+  customer_data_request_url = "https://tf-shopify.fly.dev/webhooks"
+  customer_deletion_url = "https://tf-shopify.fly.dev/webhooks"
+  shop_deletion_url = "https://tf-shopify.fly.dev/webhooks"
+
+  [[webhooks.subscriptions]]
+  topics = [ "orders/create" ]
+  uri = "/webhooks"
+
+  [[webhooks.subscriptions]]
+  topics = [ "products/update" ]
+  uri = "/webhooks"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = ""  # Filled by Shopify CLI
+
+[app_proxy]
+url = "https://tf-shopify.fly.dev/api/proxy"
+subpath = "thunderfire"
+prefix = "/apps"

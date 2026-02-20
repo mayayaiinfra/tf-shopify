@@ -1,0 +1,53 @@
+{% comment %}
+  THUNDERFIRE Node Health Block
+  Shows real-time node health status on product pages.
+  Only renders if product has thunderfire.node_id metafield.
+{% endcomment %}
+
+{% if product.metafields.thunderfire.node_id %}
+  <div
+    class="tf-node-health"
+    data-node-id="{{ product.metafields.thunderfire.node_id }}"
+    data-api-url="{{ block.settings.api_proxy_url }}"
+    data-refresh="{{ block.settings.refresh_seconds }}"
+    data-shop="{{ shop.permanent_domain }}"
+    id="tf-health-{{ product.id }}"
+  >
+    <div class="tf-health-label">{{ block.settings.label }}</div>
+    <div class="tf-health-bar">
+      <div class="tf-health-fill" style="width: 0%"></div>
+    </div>
+    <div class="tf-health-status">Loading...</div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Node Health",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Widget Label",
+      "default": "Manufacturing Health"
+    },
+    {
+      "type": "text",
+      "id": "api_proxy_url",
+      "label": "API Proxy URL",
+      "default": "/apps/thunderfire/api/proxy",
+      "info": "Uses Shopify App Proxy - no CORS issues"
+    },
+    {
+      "type": "range",
+      "id": "refresh_seconds",
+      "label": "Refresh Interval (seconds)",
+      "min": 10,
+      "max": 300,
+      "step": 10,
+      "default": 30
+    }
+  ]
+}
+{% endschema %}

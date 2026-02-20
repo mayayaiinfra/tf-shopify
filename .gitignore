@@ -1,0 +1,11 @@
+node_modules/
+build/
+.cache/
+.env
+*.log
+.DS_Store
+Thumbs.db
+*.db
+*.db-journal
+prisma/migrations/
+.shopify/

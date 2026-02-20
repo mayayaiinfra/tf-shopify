@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Required by @shopify/shopify-app-session-storage-prisma
+model Session {
+  id            String    @id
+  shop          String
+  state         String
+  isOnline      Boolean   @default(false)
+  scope         String?
+  expires       DateTime?
+  accessToken   String
+  userId        BigInt?
+  firstName     String?
+  lastName      String?
+  email         String?
+  accountOwner  Boolean   @default(false)
+  locale        String?
+  collaborator  Boolean?  @default(false)
+  emailVerified Boolean?  @default(false)
+}
+
+// THUNDERFIRE configuration per shop
+model TFConfig {
+  id          String  @id @default(cuid())
+  shop        String  @unique
+  apiUrl      String  @default("https://top.mayayai.com")
+  apiKey      String  @default("")
+  plan        String  @default("free")  // "free" | "pro" | "enterprise"
+  maxNodes    Int     @default(3)        // free=3, pro=unlimited
+  alertEmail  String  @default("")
+  alertSlack  String  @default("")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Product <-> Node binding
+model NodeBinding {
+  id          String  @id @default(cuid())
+  shop        String
+  productId   String                     // Shopify product GID
+  nodeId      String                     // THUNDERFIRE node ID
+  label       String  @default("")       // Human-readable label
+  autoGoal    Boolean @default(false)    // Send THETA goal on order?
+  goalTemplate String @default("")       // e.g. "Prepare order #{order_id}"
+  createdAt   DateTime @default(now())
+
+  @@unique([shop, productId])
+  @@index([shop])
+  @@index([nodeId])
+}
+
+// Alert history
+model Alert {
+  id          String   @id @default(cuid())
+  shop        String
+  nodeId      String
+  severity    String                     // "info" | "warning" | "critical"
+  message     String
+  dismissed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([shop, dismissed])
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Node Health",
+  "settings": {
+    "label": {
+      "label": "Widget Label"
+    },
+    "api_proxy_url": {
+      "label": "API Proxy URL",
+      "info": "Uses Shopify App Proxy - no CORS issues"
+    },
+    "refresh_seconds": {
+      "label": "Refresh Interval (seconds)"
+    }
+  }
+}
