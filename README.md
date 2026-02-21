@@ -1,5 +1,10 @@
 # THUNDERFIRE Shopify App
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-339933.svg)](https://nodejs.org)
+[![Remix](https://img.shields.io/badge/Remix-2.0-000000.svg)](https://remix.run)
+[![Shopify CLI](https://img.shields.io/badge/Shopify_CLI-3.0-7AB55C.svg)](https://shopify.dev/docs/apps/tools/cli)
+
 Connect your Shopify store to THUNDERFIRE autonomous node management. Monitor manufacturing quality, warehouse robots, delivery drones, and IoT sensors — all from your Shopify admin.
 
 ## For Shopify Merchants
